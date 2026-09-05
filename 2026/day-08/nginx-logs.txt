@@ -1,0 +1,73 @@
+nginx      671                          root cwd       DIR              259,1     4096          2 /
+nginx      671                          root rtd       DIR              259,1     4096          2 /
+nginx      671                          root txt       REG              259,1  1615648       3102 /usr/sbin/nginx
+nginx      671                          root mem       REG              259,1  2206992       5724 /usr/lib/x86_64-linux-gnu/libc.so.6
+nginx      671                          root mem       REG              259,1  6378336       5831 /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+nginx      671                          root mem       REG              259,1   751768       6580 /usr/lib/x86_64-linux-gnu/libzstd.so.1.5.7
+nginx      671                          root mem       REG              259,1   121272       6566 /usr/lib/x86_64-linux-gnu/libz.so.1.3.1
+nginx      671                          root mem       REG              259,1  1106088       5832 /usr/lib/x86_64-linux-gnu/libssl.so.3
+nginx      671                          root mem       REG              259,1   703152       5820 /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.14.0
+nginx      671                          root mem       REG              259,1   215128       5447 /usr/lib/x86_64-linux-gnu/libcrypt.so.1.1.0
+nginx      671                          root DEL       REG                0,1                  37 /dev/zero
+nginx      671                          root mem       REG              259,1   250768       5721 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+nginx      671                          root   0u      CHR                1,3      0t0          5 /dev/null
+nginx      671                          root   1u      CHR                1,3      0t0          5 /dev/null
+nginx      671                          root   2w      REG              259,1       76     290664 /var/log/nginx/error.log
+nginx      671                          root   3w      REG              259,1       76     290664 /var/log/nginx/error.log
+nginx      671                          root   4w      REG              259,1      603     290656 /var/log/nginx/access.log
+nginx      671                          root   5u     IPv4               8129      0t0        TCP *:http (LISTEN)
+nginx      671                          root   6u     IPv6               8130      0t0        TCP *:http (LISTEN)
+nginx      671                          root   7u     unix 0xffff8b86ca7ecd80      0t0       8541 type=STREAM (CONNECTED)
+nginx      671                          root   8u     unix 0xffff8b86caa50900      0t0       8542 type=STREAM (CONNECTED)
+nginx      671                          root   9u     unix 0xffff8b86ca718900      0t0       8543 type=STREAM (CONNECTED)
+nginx      671                          root  10u     unix 0xffff8b86caa50000      0t0       8544 type=STREAM (CONNECTED)
+nginx      673                      www-data cwd       DIR              259,1     4096          2 /
+nginx      673                      www-data rtd       DIR              259,1     4096          2 /
+nginx      673                      www-data txt       REG              259,1  1615648       3102 /usr/sbin/nginx
+nginx      673                      www-data mem       REG              259,1  2206992       5724 /usr/lib/x86_64-linux-gnu/libc.so.6
+nginx      673                      www-data mem       REG              259,1   919848       5727 /usr/lib/x86_64-linux-gnu/libm.so.6
+nginx      673                      www-data mem       REG              259,1  6378336       5831 /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+nginx      673                      www-data mem       REG              259,1   444952       6727 /usr/lib/x86_64-linux-gnu/libnss_systemd.so.2
+nginx      673                      www-data mem       REG              259,1   751768       6580 /usr/lib/x86_64-linux-gnu/libzstd.so.1.5.7
+nginx      673                      www-data mem       REG              259,1   121272       6566 /usr/lib/x86_64-linux-gnu/libz.so.1.3.1
+nginx      673                      www-data mem       REG              259,1  1106088       5832 /usr/lib/x86_64-linux-gnu/libssl.so.3
+nginx      673                      www-data mem       REG              259,1   703152       5820 /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.14.0
+nginx      673                      www-data mem       REG              259,1   215128       5447 /usr/lib/x86_64-linux-gnu/libcrypt.so.1.1.0
+nginx      673                      www-data DEL       REG                0,1                  37 /dev/zero
+nginx      673                      www-data mem       REG              259,1   250768       5721 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+nginx      673                      www-data   0u      CHR                1,3      0t0          5 /dev/null
+nginx      673                      www-data   1u      CHR                1,3      0t0          5 /dev/null
+nginx      673                      www-data   2w      REG              259,1       76     290664 /var/log/nginx/error.log
+nginx      673                      www-data   3w      REG              259,1       76     290664 /var/log/nginx/error.log
+nginx      673                      www-data   4w      REG              259,1      603     290656 /var/log/nginx/access.log
+nginx      673                      www-data   5u     IPv4               8129      0t0        TCP *:http (LISTEN)
+nginx      673                      www-data   6u     IPv6               8130      0t0        TCP *:http (LISTEN)
+nginx      673                      www-data   7u     unix 0xffff8b86ca718900      0t0       8543 type=STREAM (CONNECTED)
+nginx      673                      www-data   8u     unix 0xffff8b86caa50900      0t0       8542 type=STREAM (CONNECTED)
+nginx      673                      www-data   9u  a_inode               0,17        0         57 [eventpoll:5,6,8,10]
+nginx      673                      www-data  10u  a_inode               0,17        0         57 [eventfd:8]
+nginx      674                      www-data cwd       DIR              259,1     4096          2 /
+nginx      674                      www-data rtd       DIR              259,1     4096          2 /
+nginx      674                      www-data txt       REG              259,1  1615648       3102 /usr/sbin/nginx
+nginx      674                      www-data mem       REG              259,1  2206992       5724 /usr/lib/x86_64-linux-gnu/libc.so.6
+nginx      674                      www-data mem       REG              259,1   919848       5727 /usr/lib/x86_64-linux-gnu/libm.so.6
+nginx      674                      www-data mem       REG              259,1  6378336       5831 /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+nginx      674                      www-data mem       REG              259,1   444952       6727 /usr/lib/x86_64-linux-gnu/libnss_systemd.so.2
+nginx      674                      www-data mem       REG              259,1   751768       6580 /usr/lib/x86_64-linux-gnu/libzstd.so.1.5.7
+nginx      674                      www-data mem       REG              259,1   121272       6566 /usr/lib/x86_64-linux-gnu/libz.so.1.3.1
+nginx      674                      www-data mem       REG              259,1  1106088       5832 /usr/lib/x86_64-linux-gnu/libssl.so.3
+nginx      674                      www-data mem       REG              259,1   703152       5820 /usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.14.0
+nginx      674                      www-data mem       REG              259,1   215128       5447 /usr/lib/x86_64-linux-gnu/libcrypt.so.1.1.0
+nginx      674                      www-data DEL       REG                0,1                  37 /dev/zero
+nginx      674                      www-data mem       REG              259,1   250768       5721 /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+nginx      674                      www-data   0u      CHR                1,3      0t0          5 /dev/null
+nginx      674                      www-data   1u      CHR                1,3      0t0          5 /dev/null
+nginx      674                      www-data   2w      REG              259,1       76     290664 /var/log/nginx/error.log
+nginx      674                      www-data   3w      REG              259,1       76     290664 /var/log/nginx/error.log
+nginx      674                      www-data   4w      REG              259,1      603     290656 /var/log/nginx/access.log
+nginx      674                      www-data   5u     IPv4               8129      0t0        TCP *:http (LISTEN)
+nginx      674                      www-data   6u     IPv6               8130      0t0        TCP *:http (LISTEN)
+nginx      674                      www-data   7u     unix 0xffff8b86ca7ecd80      0t0       8541 type=STREAM (CONNECTED)
+nginx      674                      www-data  10u     unix 0xffff8b86caa50000      0t0       8544 type=STREAM (CONNECTED)
+nginx      674                      www-data  11u  a_inode               0,17        0         57 [eventpoll:5,6,10,12]
+nginx      674                      www-data  12u  a_inode               0,17        0         57 [eventfd:7]
