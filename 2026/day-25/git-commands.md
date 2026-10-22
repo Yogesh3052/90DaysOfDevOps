@@ -1,10 +1,11 @@
 # Git Commands Cheat Sheet (Days 22–25)
 
-A comprehensive guide to version control workflows, from local configuration to advanced history manipulation.
+A practical guide to Git version control and GitHub CLI (`gh`) workflows, from local configuration to repository management and CI/CD inspection.
 
 ---
 
 ## 1. Setup & Config
+
 Establish your identity and configure your global Git environment.
 
 ```bash
@@ -22,121 +23,324 @@ git config --list --show-origin
 ---
 
 ## 2. Basic Workflow
-Track changes, stage assets, inspect modifications, and commit snapshots to your local timeline.
+
+Track changes, stage files, inspect modifications, and commit snapshots.
 
 ```bash
-# Initialize a brand new local repository
+# Initialize a new local repository
 git init
 
-# View the status of your working directory (unstaged, staged, untracked files)
+# Inspect working-tree status
 git status
-# Short, compact status view
-git status -s
+git status -s                    # Short status view
 
-# Stage changes for the next commit
-git add file.txt       # Stage a specific file
-git add .              # Stage all changes in the current directory
+# Stage changes
+git add file.txt                 # Stage one file
+git add .                        # Stage changes under the current directory
 
-# Record staged snapshots to the history
+# Commit staged changes
 git commit -m "Commit message"
-git commit -am "Stage and commit modified tracked files in one step"
 
-# Inspect changes between working directory, staging area, and commits
-git diff               # Unstaged changes vs. last commit
-git diff --staged      # Staged changes vs. last commit
+# Commit modifications to tracked files (does not include new untracked files)
+git commit -am "Update tracked files"
 
-# Explore commit history
-git log                # Full history log
-git log --oneline      # Compact, single-line history
-git log --graph --oneline --all # Visual tree graph of all branches
+# Compare changes
+git diff                         # Unstaged changes
+git diff --staged                # Staged changes
+
+# Inspect history
+git log
+git log --oneline
+git log --graph --oneline --all  # Visual graph of all branches
 ```
 
 ---
 
 ## 3. Branching
-Isolate lines of development to work on features or fixes safely.
+
+Use branches to isolate features, fixes, and experiments.
 
 ```bash
 # List branches
-git branch             # List local branches
-git branch -a          # List both local and remote-tracking branches
+git branch                       # Local branches
+git branch -a                    # Local and remote-tracking branches
 
-# Create branches
-git branch feature-xyz # Create a new branch at current HEAD
+# Create a branch
+git branch feature-xyz
 
-# Navigate between branches
-git checkout feature-xyz  # Switch using the classic command
-git switch feature-xyz    # Switch using the modern, dedicated command
-git switch -c new-feature # Create a new branch and immediately switch to it
+# Switch branches
+git checkout feature-xyz         # Classic command
+git switch feature-xyz            # Modern command
+git switch -c new-feature         # Create and switch
 ```
 
 ---
 
-## 4. Remote
-Synchronize your local repository timeline with remote hosting servers (like GitHub or GitLab).
+## 4. Remote Repositories
+
+Synchronize local work with a remote host such as GitHub or GitLab.
 
 ```bash
-# Clone an existing remote repository locally
+# Clone an existing repository
 git clone <remote-url>
 
-# Manage remote connections
-git remote -v                          # View all connected remote aliases
-git remote add origin <remote-url>     # Map a local repo to a new remote URL
+# Inspect and configure remotes
+git remote -v
+git remote add origin <remote-url>
 
-# Fetch updates from the remote without merging them into your working files
-git fetch origin
-
-# Download remote updates and automatically merge them into your active branch
-git pull origin main
-
-# Upload local commits to the remote repository
-git push origin main
-git push -u origin feature-xyz         # Push and set the default upstream tracking branch
+# Synchronize changes
+git fetch origin                 # Download remote refs without merging
+git pull origin main             # Fetch and integrate main
+git push origin main             # Push local main
+git push -u origin feature-xyz   # Push and set upstream tracking
 ```
-> *Note on Forking:* **Forking** is not a native Git command. It is a feature provided by hosting platforms (GitHub, GitLab) to duplicate an external repository directly onto your own remote account space. You then interact with it using native `clone`, `fetch`, and `push` commands.
+
+**Forking note:** Forking is a hosting-platform feature, not a native Git command. A fork creates a copy of a repository under another account or organization.
 
 ---
 
 ## 5. Merging & Rebasing
-Integrate histories and changes from one branch into another.
+
+Integrate work from one branch into another.
 
 ```bash
-# ---- MERGING (Preserves historical context, creates a merge commit) ----
+# Merge a feature branch into main
 git switch main
 git merge feature-xyz
 
-# ---- REBASING (Rewrites history for a clean, linear timeline) ----
+# Rebase a feature branch onto main
 git switch feature-xyz
 git rebase main
 ```
 
+Merging preserves branch history and may create a merge commit. Rebasing replays commits onto a new base and rewrites commit IDs; avoid rebasing shared branches unless the team agrees.
+
 ---
 
-## 6. Stash & Cherry Pick
-Save incomplete work temporarily or surgically pluck individual commits across branches.
+## 6. Stash & Cherry-Pick
+
+Temporarily save local changes or apply a specific commit to the current branch.
 
 ```bash
-# ---- STASHING (Shelve dirty working directory changes safely) ----
-git stash              # Save tracked modifications to a temporary stack
-git stash list         # View all saved items in the stash stack
-git stash pop          # Apply the latest stashed changes and remove them from the stack
-git stash apply        # Apply the latest stashed changes but keep them in the stack
+git stash                         # Save tracked changes
+git stash list                    # List stashes
+git stash pop                     # Apply latest stash and remove it
+git stash apply                   # Apply latest stash but keep it
 
-# ---- CHERRY PICKING (Apply a specific commit from anywhere to your current HEAD) ----
-git cherry-pick <commit-hash>
+git cherry-pick <commit-hash>     # Apply one commit to current branch
 ```
 
 ---
 
 ## 7. Reset & Revert
-Undo mistakes, modify staging logs, or gracefully rewrite state tracking.
+
+Undo changes carefully.
 
 ```bash
-# ---- REVERTING (Safe for shared/public branches; creates a new "anti-commit") ----
+# Revert: create a new commit that reverses an earlier commit
 git revert <commit-hash>
 
-# ---- RESETTING (Dangerous; rewrites history; use for local cleanup only) ----
-git reset --soft HEAD~1  # Undo commit; keep changes staged in your index
-git reset --mixed HEAD~1 # Undo commit and unstage changes; keep files in working directory (Default)
-git reset --hard HEAD~1  # Undo commit, unstage changes, and DESTROY all uncommitted local modifications
+# Reset: move the current branch pointer
+git reset --soft HEAD~1           # Keep changes staged
+git reset --mixed HEAD~1          # Keep changes unstaged (default)
+git reset --hard HEAD~1           # Discard changes; destructive
 ```
+
+Use `git revert` for commits already shared with others. `git reset --hard` can permanently discard uncommitted work, so check `git status` first.
+
+---
+
+## 8. GitHub CLI (`gh`) Setup
+
+GitHub CLI lets you manage repositories, issues, pull requests, releases, and Actions workflows from a terminal.
+
+```bash
+# Check that GitHub CLI is installed
+gh --version
+
+# Sign in to GitHub
+gh auth login
+
+# Check current authentication status
+gh auth status
+
+# Refresh authentication to add the permission needed to delete repositories
+gh auth refresh -h github.com -s delete_repo
+```
+
+Only request extra scopes when you need them. The `delete_repo` scope is powerful and should be granted only when required.
+
+---
+
+## 9. GitHub Repository Management
+
+```bash
+# Clone a repository (owner/repository is explicit and unambiguous)
+gh repo clone Yogesh3052/github_cli
+
+# Create a repository interactively
+gh repo create
+
+# Create a private repository with a specific name
+gh repo create github_cli --private
+
+# View repository details
+gh repo view Yogesh3052/github_cli
+
+# List repositories for the authenticated user
+gh repo list
+
+# Delete a repository (DESTRUCTIVE; double-check the target)
+gh repo delete Yogesh3052/github_cli
+```
+
+If you are already inside the repository, commands such as `gh repo view` can usually infer the current repository. Use `OWNER/REPO` when working from another directory or when you want to be explicit.
+
+---
+
+## 10. GitHub Issues
+
+```bash
+# Create an issue in a repository (interactive prompts)
+gh issue create --repo Yogesh3052/github_cli
+
+# List issues
+gh issue list --repo Yogesh3052/github_cli
+
+# View issue number 1
+gh issue view 1 --repo Yogesh3052/github_cli
+
+# Close issue number 1
+gh issue close 1 --repo Yogesh3052/github_cli
+```
+
+Issue numbers are repository-specific. Replace `1` with an issue number that actually exists.
+
+---
+
+## 11. Pull Requests & GitHub Actions
+
+```bash
+# List pull requests for the current repository
+gh pr list
+
+# List workflow runs for a repository
+gh run list --repo Yogesh3052/Application-to-CICD
+
+# View details for a specific workflow run
+gh run view 34041560822 --repo Yogesh3052/Application-to-CICD
+
+# View logs for a failed run
+gh run view 34041560822 --repo Yogesh3052/Application-to-CICD --log-failed
+```
+
+Use `gh run list` to find recent runs, then copy a run ID into `gh run view`. The run ID above is an example from the command list and may no longer exist or may not be accessible to your account.
+
+---
+
+## 12. More Useful GitHub CLI Commands to Explore
+
+### `gh api` — Call the GitHub REST API
+
+Useful for checking details or automating tasks not covered by a dedicated `gh` command.
+
+```bash
+# Get the authenticated user's profile
+gh api user
+
+# List repositories for an owner
+gh api users/Yogesh3052/repos --paginate
+
+# Get details for a repository
+gh api repos/Yogesh3052/github_cli
+```
+
+### `gh gist` — Create and Manage Gists
+
+Gists are useful for sharing snippets, small scripts, and notes.
+
+```bash
+# Create a public gist from a local file
+gh gist create script.sh
+
+# Create a private/unlisted gist from a file
+gh gist create script.sh --private
+
+# List your gists
+gh gist list
+
+# View a gist
+gh gist view <gist-id>
+```
+
+Review a file before publishing it; never put credentials, tokens, or other secrets in a gist.
+
+### `gh release` — Manage Releases
+
+Releases attach versioned notes and assets to repository tags.
+
+```bash
+# List releases
+gh release list --repo OWNER/REPO
+
+# View a release
+gh release view v1.0.0 --repo OWNER/REPO
+
+# Create a release from an existing tag
+gh release create v1.0.0 --repo OWNER/REPO --generate-notes
+
+# Upload a build artifact to a release
+gh release upload v1.0.0 ./dist.zip --repo OWNER/REPO
+```
+
+Replace `OWNER/REPO`, tag names, and file paths with your actual values. A release command may publish content to a public audience depending on repository visibility.
+
+### `gh alias` — Create Shortcuts
+
+Aliases reduce typing for commands you run often.
+
+```bash
+# Create a shortcut to list pull requests
+gh alias set prs 'pr list'
+
+# Run the shortcut
+gh prs
+
+# List configured aliases
+gh alias list
+
+# Remove an alias
+gh alias delete prs
+```
+
+### `gh search repos` — Search GitHub Repositories
+
+Search repositories directly from the terminal.
+
+```bash
+# Search repositories by topic/keyword
+gh search repos "kubernetes platform engineering"
+
+# Limit the number of results
+gh search repos "devops" --limit 10
+
+# Search by language
+gh search repos "cloud automation" --language=Python --limit 10
+```
+
+---
+
+## 13. Quick Practice Checklist
+
+- [ ] Run `gh auth status` and confirm you are signed in.
+- [ ] Clone a repository you have permission to access.
+- [ ] View and list repositories with `gh repo view` and `gh repo list`.
+- [ ] Create a test issue, list it, view it, and close it.
+- [ ] Inspect a GitHub Actions run with `gh run list` and `gh run view`.
+- [ ] Try read-only API requests with `gh api user` and `gh api repos/OWNER/REPO`.
+- [ ] Create a gist only from a safe, non-sensitive test file.
+- [ ] Explore releases on a test repository before creating one.
+- [ ] Create and use an alias such as `gh prs`.
+- [ ] Search for repositories using `gh search repos`.
+
+**Safety reminder:** Prefer read-only commands while learning. Repository deletion, release publication, issue closure, and publishing gists can have lasting effects. Check the target and visibility before confirming.
